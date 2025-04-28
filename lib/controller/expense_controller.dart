@@ -6,6 +6,11 @@ import 'package:pr_budget_tracker/modal/expense_modal.dart';
 import 'package:pr_budget_tracker/utils/helper/db_helper.dart';
 
 class ExpenseController extends GetxController {
+  Future<List<ExpenseModal>>? allExp;
+  List? fetchPiDataExp;
+
+  num? totalExpenses = 0;
+
   Future<void> insertExpRecord({required ExpenseModal modal}) async {
     int? res = await DBHelper.dbHelper.insertExpenseRecord(modal: modal);
 
@@ -26,7 +31,6 @@ class ExpenseController extends GetxController {
     }
   }
 
-  Future<List<ExpenseModal>>? allExp;
   Future<void> fetchExpRecord() async {
     allExp = DBHelper.dbHelper.fetchExpenseRecords();
     log("$allExp");
@@ -87,14 +91,12 @@ class ExpenseController extends GetxController {
     update();
   }
 
-  num? totalExpenses = 0;
   Future<void> fetchTotalExpRecord() async {
     totalExpenses = await DBHelper.dbHelper.fetchTotalExpense();
-    log('$totalExpenses');
+    log('total Exp: $totalExpenses');
     update();
   }
 
-  List? fetchPiDataExp;
   Future<void> fetchPiDataCatExp() async {
     fetchPiDataExp = await DBHelper.dbHelper.fetchExpByCategory() ?? [];
     log("$fetchPiDataExp-----------");

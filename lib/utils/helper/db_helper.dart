@@ -138,8 +138,8 @@ class DBHelper {
     String query = "SELECT SUM($incomeAmount) AS total FROM $tableName;";
     var res = await db?.rawQuery(query);
     log("$res");
-    if (res != null) {
-      return num.parse(res.first['total'].toString());
+    if (res?.first['total'] != null) {
+      return num.parse(res!.first['total'].toString());
     } else {
       return 0;
     }
@@ -154,7 +154,7 @@ class DBHelper {
     return await db?.rawQuery(query) ?? [];
   }
 
-  //insert expense recor
+  //insert expense record
   Future<int?> insertExpenseRecord({required ExpenseModal modal}) async {
     await initDB();
     String query =
@@ -220,9 +220,10 @@ class DBHelper {
     await initDB();
     String query = "SELECT SUM($expenseAmount) AS total FROM $expTableName;";
     var res = await db?.rawQuery(query);
-    log("$res");
-    if (res != null) {
-      return num.parse(res.first['total'].toString());
+    log("*******$res");
+
+    if (res?.first['total'] != null) {
+      return num.parse(res!.first['total'].toString());
     } else {
       return 0;
     }
