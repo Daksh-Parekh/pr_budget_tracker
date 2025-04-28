@@ -8,7 +8,6 @@ import 'package:pr_budget_tracker/utils/helper/db_helper.dart';
 class ExpenseController extends GetxController {
   Future<List<ExpenseModal>>? allExp;
   List? fetchPiDataExp;
-
   num? totalExpenses = 0;
 
   Future<void> insertExpRecord({required ExpenseModal modal}) async {

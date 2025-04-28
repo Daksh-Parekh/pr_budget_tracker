@@ -220,8 +220,6 @@ class CategoryController extends GetxController {
   ];
 
   void changeSelectedCategory(String category, String type) {
-    // selectedCategory?.value = category;
-
     type == 'income'
         ? selectedIncCategory!.value = category
         : selectedExpCategory?.value = category;

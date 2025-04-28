@@ -10,6 +10,9 @@ class TransactionController extends GetxController {
   // RxString mode = "".obs;
   RxnString mode = RxnString();
   RxInt tabIndex = 0.obs;
+  Future<List<IncomeModal>>? allincome;
+  num? totalIcome = 0;
+  List? fetchPiData;
 
   void changeMode(String transMode) {
     mode.value = transMode;
@@ -40,7 +43,6 @@ class TransactionController extends GetxController {
     }
   }
 
-  Future<List<IncomeModal>>? allincome;
   Future<void> fetchIncomeRecord() async {
     allincome = DBHelper.dbHelper.fetchIncomeRecords();
     log("$allincome");
@@ -100,14 +102,12 @@ class TransactionController extends GetxController {
     update();
   }
 
-  num? totalIcome = 0;
   Future<void> fetchTotalIncomeRecord() async {
     totalIcome = await DBHelper.dbHelper.fetchTotalIncome();
     log('$totalIcome');
     update();
   }
 
-  List? fetchPiData;
   Future<void> fetchPiDataByCat() async {
     fetchPiData = await DBHelper.dbHelper.fetchIncomeByCategory() ?? [];
     log("$fetchPiData-----------");
